@@ -11,16 +11,16 @@ import warnings
 warnings.warn = warn
 
 np.random.seed(0)
-X, y = make_blobs(n_samples=5000, centers=[[4,4], [-2, -1], [2, -3], [1, 1]], cluster_std=0.9)
+X, y = make_blobs(n_samples=5000, centers=[[4,4], [-2, -1], [2, -3]], cluster_std=0.9)
 plt.scatter(X[:, 0], X[:, 1], marker='.')
-k_means = KMeans(init = "k-means++", n_clusters = 4, n_init = 12)
+k_means = KMeans(init = "k-means++", n_clusters = 3, n_init = 9)
 k_means.fit(X)
 k_means_labels = k_means.labels_ #labels for each point in the model using KMeans' .labels_ attribute and save it as k_means_labels .
 k_means_labels
 k_means_cluster_centers = k_means.cluster_centers_ # oordinates of the cluster centers using KMeans' .cluster_centers_ and save it as k_means_cluster_centers .
 k_means_cluster_centers
 
-fig = plt.figure(figsize=(6, 4))
+fig = plt.figure(figsize=(6, 3))
 
 # Colors uses a color map, which will produce an array of colors based on
 # the number of labels there are. We use set(k_means_labels) to get the
@@ -33,7 +33,7 @@ ax = fig.add_subplot(1, 1, 1)
 # For loop that plots the data points and centroids.
 # k will range from 0-3, which will match the possible clusters that each
 # data point is in.
-for k, col in zip(range(len([[4,4], [-2, -1], [2, -3], [1, 1]])), colors):
+for k, col in zip(range(len([[3,3], [-2, -1], [2, -3]])), colors):
 
     # Create a list of all data points, where the data points that are 
     # in the cluster (ex. cluster 0) are labeled as true, else they are
