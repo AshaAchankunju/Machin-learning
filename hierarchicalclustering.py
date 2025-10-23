@@ -11,7 +11,7 @@ from sklearn.datasets import make_blobs
 from scipy.spatial.distance import pdist
 X1, y1 = make_blobs(n_samples=50, centers=[[4,4], [-2, -1], [1, 1], [10,4]], cluster_std=0.9)
 plt.scatter(X1[:, 0], X1[:, 1], marker='o') 
-agglom = AgglomerativeClustering(n_clusters = 4, linkage = 'average')
+agglom = AgglomerativeClustering(n_clusters = 4, linkage = 'complete')
 agglom.fit(X1,y1)
 
 # Create a figure of size 6 inches by 4 inches.
@@ -46,14 +46,8 @@ plt.yticks([])
 plt.scatter(X1[:, 0], X1[:, 1], marker='.')
 # Display the plot
 plt.show()
-
-
-
-dist_matrix = pdist(X1)
+dist_matrix = distance_matrix(X1,X1) 
+print(dist_matrix)
 Z = hierarchy.linkage(dist_matrix, 'complete')
 plt.figure(figsize=(10, 5))
 dendro = hierarchy.dendrogram(Z)
-plt.title('Hierarchical Clustering Dendrogram')
-plt.xlabel('Sample Index')
-plt.ylabel('Distance')
-plt.show()
